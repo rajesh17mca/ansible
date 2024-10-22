@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  roles:
+    - httpd
+    
+  tasks:
+    - name: Restart httpd
+      ansible.builtin.include_tasks: restart_httpd.yaml

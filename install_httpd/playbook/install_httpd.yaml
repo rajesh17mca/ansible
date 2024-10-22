@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  tasks:
+    - name: Install apache httpd 
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    
+    - name: Copy a file index.html with Owner permissions
+      ansible.builtin.copy:
+        src: ../files/index.html
+        dest: /var/www/html
+        owner: root
+        group: root 
+        mode: '0644'
+    
+    - name: Restart httpd
+      ansible.builtin.include_tasks: restart_httpd.yaml
+        
