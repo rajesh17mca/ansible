@@ -1,0 +1,20 @@
+---
+- name: Variables demo
+  hosts: aws_ubuntu
+  gather_facts: yes
+  vars:
+    deploy_dir: /home/ubuntu
+    user: admin
+  
+  tasks:
+    - name: "Printing username play level and task level"
+      vars:
+        user: nonadmin
+      debug:
+        msg: "{{ user }}" # Prints task level
+
+    - name: "Printing deploy_dir - play level and inventory level"
+      vars:
+        user: nonadmin
+      debug:
+        msg: "{{ deploy_dir }} - {{ inventory_hostname }} - {{ inventory_hostname_short }} - {{ ansible_hostname }}" # Prints play level

@@ -6,6 +6,7 @@
       - Apple
       - Banana
       - Mango
+      
   tasks:
     - name: Loop over all the software 
       debug:
