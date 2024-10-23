@@ -1,0 +1,17 @@
+---
+- name: Gather Facts about the Server
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: print all gather_facts
+      debug: 
+        msg: "{{ ansible_facts }}"
+        
+    - name: Use facts in debug section
+      debug:
+        msg: "{{ ansible_os_family }}"
+
+    - name: Show mount points
+      debug: 
+        msg: "{{ ansible_mounts  }}"
+      when: ansible_os_family == "Debian"

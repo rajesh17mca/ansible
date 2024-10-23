@@ -1,0 +1,21 @@
+---
+# tasks file for ec2_rajesh
+- name: Start EC2 instance in AWS
+  amazon.aws.ec2_instance:
+    name: "{{ item.name }}"
+    key_name: AWS-Login
+    # vpc_subnet_id: vpc-0e9a3f5aa7d2dc7d7
+    region: us-east-1
+    instance_type: "{{ instance_type }}"
+    security_group: default
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    network_interfaces:
+      - assign_public_ip: true
+    image_id: "{{ item.image }}"
+    tags:
+      Environment: Testing
+  loop: 
+    - { 'name': 'node-1', 'image':'ami-0866a3c8686eaeeba' }
+    - { 'name': 'node-2', 'image':'ami-06b21ccaeff8cd686' }
+    - { 'name': 'node-3', 'image':'ami-06b21ccaeff8cd686' }

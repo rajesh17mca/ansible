@@ -1,0 +1,29 @@
+- name: Gather Facts about the Server
+  hosts: all
+  gather_facts: yes
+  vars:
+    fruits:
+      - Apple
+      - Banana
+      - Mango
+  tasks:
+    - name: Loop over all the software 
+      debug:
+        msg: "This is Software {{ item }}"
+      loop:
+        - wget
+        - apache2
+        - telnet
+    
+    - name: Loop over all the fruits 
+      debug:
+        msg: "This is fruit {{ fruit }} and available at index {{ index }} possition"
+      loop: "{{ fruits }}"
+      loop_control:
+        index_var: index
+        loop_var: fruit
+
+    - name: Loop over the mounts from gather facts
+      debug: 
+        msg: "Mount point name {{ item.mount }}"
+      loop: "{{ ansible_mounts }}"

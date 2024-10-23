@@ -1,0 +1,17 @@
+---
+# tasks file for ec2_rajesh
+- name: Start EC2 instance in AWS
+  amazon.aws.ec2_instance:
+    name: ansible ec2 install
+    key_name: AWS-Login
+    # vpc_subnet_id: vpc-0e9a3f5aa7d2dc7d7
+    region: us-east-1
+    instance_type: "{{ instance_type }}"
+    security_group: default
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    network_interfaces:
+      - assign_public_ip: true
+    image_id: ami-0866a3c8686eaeeba
+    tags:
+      Environment: Testing

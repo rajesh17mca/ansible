@@ -1,0 +1,19 @@
+---
+- name: Creating Directory structure for the the application
+  hosts: all
+  gather_facts: yes
+  vars:
+    deploy_dir: /home/ubuntu
+    app_name: 
+      - {"name": "app_80"}
+      - {"name": "app_8080"}
+
+  tasks:
+    - name: Create App Home Directory structure
+      file:
+        path: "{{ deploy_dir }}/{{ item[0].name }}/{{ item[1] }}"
+        state: directory
+        mode: 0755
+      with_nested:
+        - "{{ app_name }}"
+        - [ 'install', 'runtime', 'download', 'backup', 'stage', 'stage/conf', 'stage/log', 'stage/bin', 'stage/app' ]
