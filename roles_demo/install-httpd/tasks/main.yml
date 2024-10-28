@@ -1,0 +1,17 @@
+---
+# tasks file for install-httpd
+- name: Install apache httpd 
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+    update_cache: yes
+
+- name: Check Apache2 service status
+  service:
+    name: apache2
+    state: started
+  register: apache2_status
+
+- name: Print Apache2 service status
+  debug:
+    msg: "Apache2 service is {{ 'started' if apache2_status.status == 'started' else 'stopped' }}"

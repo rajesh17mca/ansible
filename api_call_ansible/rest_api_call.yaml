@@ -1,0 +1,15 @@
+---
+- name: Rest API Call 
+  hosts: localhost
+  tasks:
+    - name: Execute REST API Call
+      ansible.builtin.uri:
+        url: https://restcountries.com/v3.1/name/deutschland
+        method: GET
+        status_code:
+          - 200
+      register: rest_response
+      
+    - name: Print data
+      ansible.builtin.debug:
+        msg: "{{ rest_response }}"

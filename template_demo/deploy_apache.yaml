@@ -1,0 +1,21 @@
+---
+- name: Install and Run the Apache httpd for templates demo
+  hosts: all
+  become: true
+  gather_facts: yes
+  tasks:
+    - name: Install and Run apache httpd 
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+
+    - name: Copy a file index.html with Owner permissions
+      ansible.builtin.template:
+        src: web_page_template.j2
+        dest: /var/www/html/index.html
+        force: true
+        owner: root
+        group: root
+        mode: '0644'
+        

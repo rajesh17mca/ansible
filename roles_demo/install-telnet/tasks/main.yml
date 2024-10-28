@@ -1,0 +1,7 @@
+---
+# tasks file for install-telnet
+- name: Install apache telnet 
+  ansible.builtin.apt:
+    name: telnet
+    state: present
+    update_cache: yes

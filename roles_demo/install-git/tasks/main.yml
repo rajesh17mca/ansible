@@ -1,0 +1,12 @@
+---
+# tasks file for install-git
+- name: Install GIT on EC2
+  apt:
+    name: git
+    state: present
+    update_cache: yes
+
+- name: Clone Remote Git Repository to Host
+  git:
+    repo: https://github.com/rajesh17mca/ansible.git
+    dest: /home/ubuntu
